@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>exercises</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        form {
+            padding: 10px;
+            margin: 7px;
+        }
+
+        input {
+            margin-top: 10px;
+            border: 1px solid rebeccapurple;
+            border-radius: 7px;
+            letter-spacing: 1px;
+            line-height: 30px;
+        }
+
+        .contenedor {
+            display: flex;
+            flex-wrap: wrap;
+            max-height: 200px;
+            flex-shrink: unset;
+        }
+    </style>
+</head>
+
+<body>
+    <form id='form' onsubmit=''>
+        <h1>Fibonacci</h1>
+        <input type='text' id="Fib" />
+        <button id='primerBoton' onclick="" type="button">Fibonacci</button>
+        <button id='primerBotonBorrar' onclick="" type="button">Fibonacci</button>
+        <div class="contenedor" id='contenedor'>
+            <p id='inyectar'></p>
+        </div>
+        <h1>Fibonacci string</h1>
+        <input type='text' id="FibString" />
+        <button type="button" id='segundoBoton'>Click Me!</button>
+
+        <h1>Calulator simple</h1>
+        <input type='text' id="simpleCalcular" />
+
+        <button type="button" id='tercerBoton'>Click Me!</button>
+    </form>
+
+
+    <script lang="JavaScript">
+
+        const $primerBoton = document.getElementById('primerBoton').addEventListener('click', eventPrimerBoton)
+
+        function eventPrimerBoton(e) {
+            console.log(e)
+            const Fib = Number(document.getElementById('Fib').value)
+            let a = 1
+            let b = 1
+            for (let i = 0; i < Fib; i++) {
+                const sig = a + b
+                a = b
+                b = sig
+                console.log(sig)
+                inyectarFib(sig, i)
+            }
+        }
+        const $primerBotonBorrar = document.getElementById('primerBotonBorrar').addEventListener('click', primerBotonBorrar)
+        function primerBotonBorrar(e) {
+            console.log(e)
+            const $contenedor = document.getElementById('contenedor')
+            const $child = $contenedor.firstElementChild
+            // while ($child) {
+            //     $contenedor.removeChild($child)
+            //     $contenedor.firstElementChild = ''
+            // }
+            $child
+                ? $contenedor.removeChild($child)
+                : ''
+
+        }
+
+        // document.getElementById('primerBoton').addEventListener('click', e => console.log(e))
+
+        const $inyectar = document.getElementById('inyectar')
+        function inyectarFib(sig, i) {
+            const $node = document.createTextNode(`fib ${i + 1}: ${sig}`)
+            if ($node) {
+                const $createP = document.createElement('h4')
+                const $contenedor = document.getElementById('contenedor')
+                $createP.appendChild($node)
+                $inyectar.appendChild($createP)
+            } else {
+            }
+        }
+
+
+        const $segundoBoton = document.getElementById('segundoBoton').addEventListener('click', eventSegundoBoton)
+        function eventSegundoBoton(e) {
+            console.log(e)
+            const $num2 = document.getElementById('FibString').value
+            let a = 0
+            let b = 1
+            let array = []
+            for (let i = 0; i < $num2; i++) {
+                const sig = a + b
+                a = b
+                b = sig
+                array.push(sig)
+            }
+            console.log(array)
+        }
+
+        const $tercerBoton = document.getElementById('tercerBoton').addEventListener('click', (e) => {
+            const $num3 = document.getElementById('simpleCalcular').value
+            console.log($num3)
+
+            if ($num3.includes('+')) {
+                const res = $num3.split('+', 2)
+                const result = Number(res[0]) + Number(res[1])
+                console.log(result)
+            }
+            if ($num3.includes('-')) {
+                const res = $num3.split('-', 2)
+                const result = Number(res[0]) - Number(res[1])
+                console.log(result)
+            }
+            if ($num3.includes('*')) {
+                const res = $num3.split('*', 2)
+                const result = Number(res[0]) * Number(res[1])
+                console.log(result)
+            }
+            if ($num3.includes('/')) {
+                const res = $num3.split('/', 2)
+                const result = Number(res[0]) / Number(res[1])
+                console.log(result)
+            }
+
+        })
+
+        // const $form = document.getElementById('form')
+        // $form.addEventListener('submit', submitFunction)
+        // handleChange = () => {
+        //     value = document.getElementById('texto11').value
+        // }
+
+
+
+
+    </script>
+</body>
+
+</html>
